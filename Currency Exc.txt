@@ -1,0 +1,11 @@
+Total Sales exchange = 
+var SelectedCurrency = VALUES('Exchange Rate'[Currency])
+
+RETURN
+
+IF(
+    COUNTROWS(SelectedCurrency)=1,
+    [Total Sales] * LOOKUPVALUE(
+        'Exchange Rate'[Exchange Rate USD], 'Exchange Rate'[Currency], SelectedCurrency
+    )
+)

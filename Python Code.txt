@@ -1,0 +1,66 @@
+import matplotlib.pyplot as plt
+df = dataset.copy()
+sorted_df = df.sort_values(by = 'Total Profit')
+index_df = range(0, len(df.index))
+plt.hlines(y=index_df, xmin=sorted_df['Last Year Profit'], xmax=sorted_df['Total Profit'], color='tomato', alpha=0.7)
+
+plt.scatter(sorted_df['Total Profit'], index_df, label="CY Profit" , color='Green', s=120, alpha=0.7)
+plt.scatter(sorted_df['Last Year Profit'], index_df, label= 'LY Profit', color='red', s=120, alpha=0.7)
+
+plt.legend()
+
+plt.title("YOY Profit Comparision")
+plt.yticks(index_df, sorted_df['Region'])
+plt.xlabel("Profit Values")
+plt.ylabel("Country")
+plt.show()
+
+-----------
+
+Same code With Formating:
+
+import matplotlib.pyplot as plt
+
+# Assuming 'dataset' is your DataFrame
+df = dataset.copy()
+
+# Sorting the DataFrame by 'Total Profit'
+sorted_df = df.sort_values(by='Total Profit')
+
+# Creating an index for the y-axis
+index_df = range(0, len(df.index))
+
+# Set the figure size
+fig, ax = plt.subplots(figsize=(12, 8))
+
+# Plotting the horizontal lines
+ax.hlines(y=index_df, xmin=sorted_df['Last Year Profit'], xmax=sorted_df['Total Profit'], color='tomato', alpha=0.7)
+
+# Scatter plot for Current Year (CY) Profit
+ax.scatter(sorted_df['Total Profit'], index_df, label="CY Profit", color='Green', s=120, alpha=0.7)
+
+# Scatter plot for Last Year (LY) Profit
+ax.scatter(sorted_df['Last Year Profit'], index_df, label='LY Profit', color='red', s=120, alpha=0.7)
+
+# Adding labels and legend with increased font size and bold text
+ax.legend(fontsize='large', labels=['CY Profit', 'LY Profit'])
+ax.set_title("YOY Profit Comparison", fontsize='x-large', fontweight='bold')
+ax.set_yticks(index_df)
+ax.set_yticklabels(sorted_df['Region'], fontsize='medium', fontweight='bold')
+ax.set_xlabel("Profit Values", fontsize='large', fontweight='bold')
+ax.set_ylabel("Country", fontsize='large', fontweight='bold')
+
+# Displaying Profit values on the x-axis
+ax.tick_params(axis='x', labelrotation=45, labelsize='medium', width=2)  # Rotating x-axis labels for better readability
+
+# Set background color to light grey
+ax.set_facecolor('#F0F0F0')  # Hex color code for light grey
+
+# Remove the outside borders
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_visible(False)
+ax.spines['left'].set_visible(False)
+
+# Display the chart
+plt.show()
